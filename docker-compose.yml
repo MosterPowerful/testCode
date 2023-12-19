@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  expert-file:
+    build: .
+    ports:
+      - "8040:8040"
+    volumes:
+      - /docker-app/expert-file/expert-upload-file:/expert-upload-file:rw
+

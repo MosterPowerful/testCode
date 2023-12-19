@@ -1,0 +1,52 @@
+server:
+  port: 8040
+  servlet:
+    context-path: /expert-file
+spring:
+  # 文件服务除了日志，不对数据库进行写操作，否则可能会有分布式事务问题
+  datasource:
+    url: jdbc:dm://192.168.1.168:5326/EXPERT_AUDIT?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8
+    username: EXPERT_AUDIT
+    password: Ep9@46#1a2
+    driver-class-name: dm.jdbc.driver.DmDriver
+  # 允许循环依赖
+  allow-circular-references: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+mybatis-plus:
+  #  mapper-locations: classpath*:mapper/*.xml
+  global-config:
+    db-config:
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+      logic-delete-field: is_deleted
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+logging:
+  level:
+    com.huilian.expert: debug
+    io.swagger.models.parameters: error
+hlxx:
+  jwt:
+    header: Authorization
+    # token过期时间(秒)
+    accessTokenExpireTime: 2592000
+  sso:
+    client-id: szjrfzzxzj
+    client-secret: bkww3999
+    tyrz-url: https://tyrztest.gd.gov.cn
+    sso-vue-url: http://localhost:9200/corp/sso
+  client:
+    expert: file
+  file:
+    path: /expert-upload-file/
+    iconImage: /expert-upload-file/sys_icon/
+    videoPath: /expert-upload-file/
+    template: /expert-upload-file/
